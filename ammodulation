@@ -1,0 +1,39 @@
+clc;
+close all;
+            % SALİH IŞIK 171519002
+
+m=1; % yüzde yüz modülasyon yapmasi icin normalde yüzdesini de ayarlayabiliriz
+Am=5; % sinyallerin genligi modülasyonlu sinyalin yarısı
+fa=20; % modulasyonlu sinyalin frekansı
+fc=fa*10;% tasiyici sinyal frekansı oranı 
+
+Ta=1/fa; % //       //        Periyodu
+t=0:Ta/999:6*Ta; % simülasyon zamanı
+ym=Am*sin(2*pi*fa*t);
+figure(1)
+subplot(3,1,1); 
+plot(t,ym), grid on;% ekrana yazdırdıgımız grafiğe döktüğümüz kısım
+title ( '  Bilgi Sinyali   ');
+xlabel ( ' Zaman(sn) ');
+ylabel (' Genlik(volt)   ');
+
+
+Ac=Am/m;
+
+Tc=1/fc;% tasiyici sinyal periyodu
+yc=Ac*sin(2*pi*fc*t);% tasiyici sinyal denklemi
+subplot(3,1,2);
+plot(t,yc), grid on;
+title ( '  Taşıyıcı Sinyal   ');
+xlabel ( ' Zaman(sn) ');
+ylabel ('   Genlik(volt)    ');
+
+y=Ac*(1+m*sin(2*pi*fa*t)).*sin(2*pi*fc*t); 
+subplot(3,1,3);
+plot(t,y)
+title ( '  Modüleli Sinyal  ');
+xlabel ( ' Zaman(sn) ');
+ylabel (' Genlik(volt)   ');
+grid on;
+
+
